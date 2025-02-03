@@ -1,6 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Security.AccessControl;
 using static LINQ_02.ListGenerator;
+using static System.Net.Mime.MediaTypeNames;
 namespace LINQ_02
 {
     internal class Program
@@ -192,6 +196,113 @@ namespace LINQ_02
             #endregion
 
             #endregion
+
+            #region Partitioning Operators
+            #region 1. Get the first 3 orders from customers in Washington
+            //var Result = CustomerList.Where(W => W.City == "Washington").Select(O => O.Orders).Take(3);
+            //foreach(var Customer in Result)
+            //{
+            //    Console.WriteLine(Customer);
+            //}
+            #endregion
+
+            #region 2. Get all but the first 2 orders from customers in Washington.
+            //var Result = CustomerList.Where(W => W.City == "Washington").SelectMany(O => O.Orders).Skip(2);
+            //foreach (var Customer in Result)
+            //{
+            //    Console.WriteLine(Customer);
+            //}
+            #endregion
+
+            #region 3. Return elements starting from the beginning of the array until a number is hit that is less than its position in the array.
+            //int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            //var Result = numbers.TakeWhile((N, I) => N > I);
+            //foreach ( var result in Result)
+            //{
+            //    Console.WriteLine(result);
+            //}
+            #endregion
+
+            #region 4.Get the elements of the array starting from the first element divisible by 3.
+            //int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            //var Result = numbers.SkipWhile(N => N % 3 != 0);
+            //foreach (var result in Result)
+            //{
+            //    Console.WriteLine(result);
+            //}
+            #endregion
+
+            #region 5. Get the elements of the array starting from the first element less than its position.
+            //int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            //var Result = numbers.SkipWhile((N, I) => N > I);
+            //foreach ( var i in Result)
+            //{
+            //    Console.WriteLine(i);
+            //}
+            #endregion
+            #endregion
+
+            #region Quantifiers
+            #region 1. Determine if any of the words in dictionary_english.txt (Read dictionary_english.txt into Array of String First) contain the substring 'ei'.
+            //string path = "C:/Users/abdos/OneDrive/Desktop/.net/C#/LINQ/LINQ 02/LINQ 02/bin/Debug/net8.0/dictionary_english.txt";
+            //string[] content = File.ReadAllLines(path);
+            //var Result = content.Any(W => W.Contains("ei"));
+            //Console.WriteLine(Result);
+            #endregion
+
+            #region 2. Return a grouped a list of products only for categories that have at least one product that is out of stock.
+            //var Result = ProductList.GroupBy(C => C.Category).Where(P => P.Any(S => S.UnitsInStock == 0));
+            //foreach (var item in Result)
+            //{
+            //    Console.WriteLine(item.Key);
+            //}
+            #endregion
+
+            #region 3. Return a grouped a list of products only for categories that have all of their products in stock.
+            //var Result = ProductList.GroupBy(C => C.Category).Where(P => P.All(S => S.UnitsInStock > 0));
+            //foreach (var item in Result)
+            //{
+            //    Console.WriteLine(item.Key);
+            //}
+            #endregion
+
+            #endregion
+
+            #region Grouping Operators
+            #region 1. Use group by to partition a list of numbers by their remainder when divided by 5
+            //List<int> numbers = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            //var Result = numbers.GroupBy(N => N % 5);
+            //foreach(var item in Result)
+            //{
+            //    Console.WriteLine($"Number With Remainder Of {item.Key} When Divid By 5: ");
+            //    foreach (var item2 in item)
+            //        Console.WriteLine(item2);
+            //}
+            #endregion
+
+            #region 2. Uses group by to partition a list of words by their first letter Use dictionary_english.txt for Input
+            //string path = "C:/Users/abdos/OneDrive/Desktop/.net/C#/LINQ/LINQ 02/LINQ 02/bin/Debug/net8.0/dictionary_english.txt";
+            //string[] content = File.ReadAllLines(path);
+            //var Result = content.GroupBy(N => N[0]);
+            //foreach ( var item in Result)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+
+            #region 3. Consider this Array as an Input
+            //string[] Arr = { "from", "salt", "earn", " last", "near", "form" };
+            //var Result = Arr.GroupBy(W => new string(W.OrderBy(C => C).ToArray()).ToList());
+            //foreach ( var item in Result)
+            //{
+            //    foreach(var i in item)
+            //        Console.WriteLine(i);
+            //    Console.WriteLine(".......");
+            //}
+            #endregion
+
+            #endregion
+
         }
     }
 }

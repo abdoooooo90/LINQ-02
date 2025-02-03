@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Text.RegularExpressions;
 using static Demo.ListGenerator;
 namespace Demo
 {
@@ -130,8 +131,8 @@ namespace Demo
             #endregion
 
             #region Set Operators
-            var Seq01 = Enumerable.Range(0, 100);
-            var Seq02 = Enumerable.Range(50, 100);
+            //var Seq01 = Enumerable.Range(0, 100);
+            //var Seq02 = Enumerable.Range(50, 100);
             #region Union
             //var Result = Seq01.Union(Seq02);
             //Console.WriteLine("Seq01");
@@ -205,6 +206,129 @@ namespace Demo
             #endregion
 
             #endregion
+
+            #region Quantifier Operators => Retrun Boolean Value
+            #region Any 
+            //Console.WriteLine(ProductList.Any());
+            // Retruns True => If The Sequenace Just Contains At Least One Element
+            #endregion
+
+            #region All
+            //Console.WriteLine(ProductList.All(P => P.UnitsInStock == 0));
+            // Retruns True => If The Sequenace Are Matching The Condition 
+            #endregion
+
+            #region Contaions 
+            //Console.WriteLine(ProductList.Contains(ProductList[0]));
+            #endregion
+
+            #region SequanceEqual
+            //var seq01 = Enumerable.Range(0, 100);
+            //var seq02 = Enumerable.Range(0, 100);
+            //Console.WriteLine(seq01.SequenceEqual(seq02));
+            #endregion
+
+            #endregion
+
+            #region Transformation Operators [Zipping Operators]
+            //List<string> Words = new List<string>() { "Ten", "Twenty", "Thrity", "Fourty" };
+            //int[]Numbers = new int[] { 10, 20, 30, 40,  50, 60 };
+            //var Result01 = Numbers.Zip(Words);
+            //var Result02 = Numbers.Zip(Words, (number,word) => $"{word} = {number}");
+
+            //foreach(var item in Result02)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+
+            #region Grouping By
+            #region Example 01
+            //var Result = from P in ProductList
+            //             group P by P.Category;
+
+            //Result = ProductList.GroupBy(P => P.Category);
+            //foreach(var group in Result)
+            //{
+            //    Console.WriteLine(group.Key);
+            //    foreach(var item in group)
+            //    {
+            //        Console.WriteLine(item);
+            //    }
+            //}
+            #endregion
+
+            #region Example 02
+            //var Result = from P in ProductList
+            //             where P.UnitsInStock > 0
+            //             group P by P.Category
+            //             into ProductGroup
+            //             where ProductGroup.Count() > 10
+            //             select new { Category = ProductGroup.Key, Count = ProductGroup.Count()};
+            ////-----------------------
+            //Result = ProductList.Where(P => P.UnitsInStock > 0).GroupBy(C => C.Category).Where(P => P.Count() > 10).
+            //                     Select(ProductGroup => new
+            //                     {
+            //                         Category = ProductGroup.Key,
+            //                         Count = ProductGroup.Count()
+            //                     });
+
+            //foreach(var Product in Result)
+            //{
+            //    Console.WriteLine(Product);
+            //}
+            #endregion
+
+            #endregion
+
+            #region Partition Operators
+            //var Result = ProductList.Take(10);
+            //// Take 10 Numbers From First
+            //Result = ProductList.Where(P => P.UnitsInStock > 0).Take(5);
+            //Result = ProductList.Where(P => P.UnitsInStock > 0).TakeLast(5);
+            //// TakeLast => Take Number Of Element From Last Only
+            //-----------------------------
+            //var Result = ProductList.Skip(10);
+            //// Skip 10 Numbers From First
+            //Result = ProductList.Where(P => P.UnitsInStock > 0).Skip(5);
+            //Result = ProductList.Where(P => P.UnitsInStock > 0).SkipLast(5);
+            //// SkipLast => Skip Number Of Element From Last Only\
+            //---------------------------------
+            //                0, 1, 2, 3, 4, 5, 6, 7
+            //int[] Numbers = { 5, 4, 1, 3, 9, 8, 7, 5 };
+            //var Result = Numbers.TakeWhile((Num, I) => Num > I);
+            //var Result = Numbers.SkipWhile(Num => Num % 3 != 0);
+            //foreach (var item in Result)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+
+            #region Let & Into
+            //var Names = new List<string>() { "Rana", "Ahmed", "Ali", "Abdelfatah" };
+            //var Result = from N in Names
+            //             select Regex.Replace(N, "[aeiouAEIOU]", string.Empty)
+            //             //Restart Query With Introducing New Range Variable : NoVowlName
+            //             into NoVowlName
+            //             where NoVowlName.Length > 3
+            //             select NoVowlName;
+            ////-----------------------------
+            //Result = from N in Names
+            //         let NoVowlName =  Regex.Replace(N, "[aeiouAEIOU]", string.Empty)
+            //             //Continue Query With Add  Range Variable : NoVowlName
+            //         where NoVowlName.Length > 3
+            //         select NoVowlName;
+            ////------------------------------
+            //Result = Names.Select(N => Regex.Replace(N, "[aeiouAEIOU]", string.Empty)).
+            //                Where(NoVowlName => NoVowlName.Length > 3);
+
+            //foreach (var item in Result)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+
+
         }
     }
 }
